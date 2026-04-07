@@ -1,8 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-black text-2xl text-roofing-blue leading-tight uppercase tracking-tight">
-            {{ __('Account Settings') }}
-        </h2>
+        <div class="flex items-center gap-4">
+            <a href="{{ route('dashboard') }}" class="p-2 text-roofing-blue hover:bg-blue-50 rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            </a>
+            <h2 class="font-black text-2xl text-roofing-blue leading-tight uppercase tracking-tight">
+                {{ __('Account Settings') }}
+            </h2>
+        </div>
     </x-slot>
 
     <div class="py-6" x-data="{ activeTab: 'profile' }">
