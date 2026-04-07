@@ -33,8 +33,8 @@ class TradieController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'contact_number' => 'nullable|string|max:20',
-            'address' => 'nullable|string',
+            'contact_number' => 'required|string|max:20',
+            'address' => 'required|string',
             'photo' => 'nullable|image|max:2048',
             'passport' => 'nullable|file|mimes:pdf,jpg,png,jpeg|max:5120',
             'additional_document' => 'nullable|file|mimes:pdf,jpg,png,jpeg,doc,docx|max:10240',
@@ -80,8 +80,8 @@ class TradieController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'contact_number' => 'nullable|string|max:20',
-            'address' => 'nullable|string',
+            'contact_number' => 'required|string|max:20',
+            'address' => 'required|string',
             'photo' => 'nullable|image|max:2048',
             'passport' => 'nullable|file|mimes:pdf,jpg,png,jpeg|max:5120',
             'additional_document' => 'nullable|file|mimes:pdf,jpg,png,jpeg,doc,docx|max:10240',

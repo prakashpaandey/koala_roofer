@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('tradies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('contact_number')->nullable();
-            $table->text('address')->nullable();
+            $table->string('contact_number');
+            $table->text('address');
             $table->string('photo_path')->nullable();
             $table->string('passport_path')->nullable();
             $table->string('additional_document_path')->nullable();

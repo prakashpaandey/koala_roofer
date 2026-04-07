@@ -18,20 +18,20 @@
                                 <h3 class="text-lg font-medium text-gray-900 border-b pb-2">Personal Information</h3>
                                 
                                 <div>
-                                    <x-input-label for="name" :value="__('Full Name')" />
+                                    <x-input-label for="name" :value="__('Full Name *')" />
                                     <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
                                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                 </div>
 
                                 <div>
-                                    <x-input-label for="contact_number" :value="__('Contact Number')" />
-                                    <x-text-input id="contact_number" class="block mt-1 w-full" type="text" name="contact_number" :value="old('contact_number')" />
+                                    <x-input-label for="contact_number" :value="__('Contact Number *')" />
+                                    <x-text-input id="contact_number" class="block mt-1 w-full" type="text" name="contact_number" :value="old('contact_number')" required />
                                     <x-input-error :messages="$errors->get('contact_number')" class="mt-2" />
                                 </div>
 
                                 <div>
-                                    <x-input-label for="address" :value="__('Address')" />
-                                    <textarea id="address" name="address" rows="3" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">{{ old('address') }}</textarea>
+                                    <x-input-label for="address" :value="__('Address *')" />
+                                    <textarea id="address" name="address" rows="3" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>{{ old('address') }}</textarea>
                                     <x-input-error :messages="$errors->get('address')" class="mt-2" />
                                 </div>
                             </div>
