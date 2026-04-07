@@ -1,4 +1,9 @@
 <x-guest-layout>
+    <div class="mb-8 text-center">
+        <h2 class="text-2xl font-black text-roofing-blue uppercase tracking-tight italic">Join Koala Roofer</h2>
+        <p class="text-xs font-bold text-secondary-text uppercase tracking-widest mt-1">Create your management account</p>
+    </div>
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 

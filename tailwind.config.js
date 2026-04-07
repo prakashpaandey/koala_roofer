@@ -14,6 +14,16 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'roofing-blue': '#1F3A5F',
+                'construction-orange': '#F97316',
+                'soft-gray': '#F4F6F9',
+                'primary-text': '#1F2937',
+                'secondary-text': '#6B7280',
+                'success-green': '#22C55E',
+                'warning-amber': '#F59E0B',
+                'error-red': '#EF4444',
+            },
         },
     },
 
