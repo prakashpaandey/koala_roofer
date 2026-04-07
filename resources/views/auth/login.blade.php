@@ -22,9 +22,9 @@
             <div class="flex justify-between items-center">
                 <x-input-label for="password" :value="__('Password')" class="text-xs font-bold uppercase tracking-wider text-roofing-blue" />
                 @if (Route::has('password.request'))
-                    <a class="text-xs font-semibold text-construction-orange hover:text-orange-700 transition" href="{{ route('password.request') }}">
+                    <!-- <a class="text-xs font-semibold text-construction-orange hover:text-orange-700 transition" href="{{ route('password.request') }}">
                         {{ __('Forgot?') }}
-                    </a>
+                    </a> -->
                 @endif
             </div>
 

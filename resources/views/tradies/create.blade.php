@@ -26,23 +26,23 @@
                                     <h3 class="text-lg font-black text-roofing-blue uppercase tracking-tight">Personal Information</h3>
                                     <p class="text-xs text-secondary-text mt-1 font-medium">Core contact details for the tradie</p>
                                 </div>
-                                
+
                                 <div class="space-y-4">
                                     <div>
                                         <x-input-label for="name" :value="__('Full Name *')" class="text-xs font-bold uppercase tracking-wider text-roofing-blue" />
-                                        <x-text-input id="name" class="block mt-1 w-full border-gray-200 focus:border-construction-orange focus:ring-construction-orange shadow-sm" type="text" name="name" :value="old('name')" required autofocus placeholder="e.g. John Doe" />
+                                        <x-text-input id="name" class="block mt-1 w-full border-gray-200 focus:border-construction-orange focus:ring-construction-orange shadow-sm" type="text" name="name" :value="old('name')" required autofocus placeholder="e.g. Steve Smith" />
                                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                     </div>
 
                                     <div>
                                         <x-input-label for="contact_number" :value="__('Contact Number *')" class="text-xs font-bold uppercase tracking-wider text-roofing-blue" />
-                                        <x-text-input id="contact_number" class="block mt-1 w-full border-gray-200 focus:border-construction-orange focus:ring-construction-orange shadow-sm" type="text" name="contact_number" :value="old('contact_number')" required placeholder="e.g. 0411 222 333" />
+                                        <x-text-input id="contact_number" class="block mt-1 w-full border-gray-200 focus:border-construction-orange focus:ring-construction-orange shadow-sm" type="text" name="contact_number" :value="old('contact_number')" required placeholder="e.g. 9805656245" />
                                         <x-input-error :messages="$errors->get('contact_number')" class="mt-2" />
                                     </div>
 
                                     <div>
                                         <x-input-label for="address" :value="__('Working Address *')" class="text-xs font-bold uppercase tracking-wider text-roofing-blue" />
-                                        <textarea id="address" name="address" rows="4" class="block mt-1 w-full border-gray-200 focus:border-construction-orange focus:ring-construction-orange rounded-xl shadow-sm transition-all" required placeholder="e.g. 123 Roofer Way, Sydney NSW 2000">{{ old('address') }}</textarea>
+                                        <textarea id="address" name="address" rows="4" class="block mt-1 w-full border-gray-200 focus:border-construction-orange focus:ring-construction-orange rounded-xl shadow-sm transition-all" required placeholder="e.g. 123 Narayani Road, Bharatpur-10, Chitwan 44200">{{ old('address') }}</textarea>
                                         <x-input-error :messages="$errors->get('address')" class="mt-2" />
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                                     <h3 class="text-lg font-black text-roofing-blue uppercase tracking-tight">Onboarding Files</h3>
                                     <p class="text-xs text-secondary-text mt-1 font-medium">Upload necessary verification documents</p>
                                 </div>
-                                
+
                                 <div class="space-y-6">
                                     <div class="p-4 bg-gray-50 rounded-xl border border-dashed border-gray-200 group hover:border-roofing-blue transition-colors">
                                         <x-input-label for="photo" :value="__('Profile Photo')" class="text-xs font-bold uppercase tracking-wider text-roofing-blue" />
@@ -89,4 +89,3 @@
         </div>
     </div>
 </x-app-layout>
-
