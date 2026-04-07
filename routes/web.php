@@ -19,7 +19,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('tradies', TradieController::class);
+    Route::resource('tradies', TradieController::class)->parameters([
+        'tradies' => 'tradie'
+    ]);
     Route::resource('invoices', InvoiceController::class);
     Route::get('invoices/{invoice}/download', [InvoiceController::class, 'download'])->name('invoices.download');
 });
