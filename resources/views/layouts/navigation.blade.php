@@ -1,7 +1,7 @@
-<nav class="bg-white border-b border-gray-200 h-20 flex items-center shadow-sm">
+<nav class="bg-white border-b border-gray-200 h-16 md:h-20 flex items-center shadow-sm">
     <!-- Primary Navigation Menu -->
     <div class="w-full px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16 items-center">
+        <div class="flex justify-between h-14 md:h-16 items-center">
             <div class="flex items-center">
                 <!-- Mobile Mobile Hamburger -->
                 <button @click="sidebarOpen = !sidebarOpen" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-roofing-blue hover:bg-gray-100 focus:outline-none transition lg:hidden shadow-sm">
@@ -19,12 +19,12 @@
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="flex items-center gap-4">
-                 <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="flex items-center">
+                 <div class="flex items-center ms-2 sm:ms-6">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            <button class="flex items-center gap-3 px-4 py-2 border border-gray-100 text-sm font-bold rounded-full text-roofing-blue bg-gray-50 hover:bg-white hover:shadow-md transition-all duration-200">
-                                <div class="w-8 h-8 rounded-full bg-roofing-blue flex items-center justify-center text-white text-xs font-black shadow-inner">
+                            <button class="flex items-center gap-2 md:gap-3 px-2 md:px-4 py-1.5 md:py-2 border border-gray-100 text-sm font-bold rounded-full text-roofing-blue bg-gray-50 hover:bg-white hover:shadow-md transition-all duration-200">
+                                <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-roofing-blue flex items-center justify-center text-white text-[10px] md:text-xs font-black shadow-inner">
                                     {{ substr(Auth::user()->name, 0, 1) }}
                                 </div>
                                 <div class="hidden md:block">{{ Auth::user()->name }}</div>

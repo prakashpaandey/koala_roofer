@@ -164,7 +164,7 @@
 
         <div class="footer">
             Generated on {{ now()->format('d M Y H:i:s') }}<br>
-            © 2024 Koala Roofer Management System. All rights reserved.
+            © 2026 Koala Roofer Management System. All rights reserved.
         </div>
     </div>
 </body>
