@@ -22,45 +22,46 @@
             @endif
 
             <!-- Mobile Card Layout -->
-            <div class="grid grid-cols-1 gap-4 md:hidden mb-6">
+            <div class="grid grid-cols-1 gap-5 md:hidden mb-6">
                 @forelse($invoices as $invoice)
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 group transition-all duration-300">
-                        <div class="flex items-start justify-between mb-4">
-                            <div>
-                                <div class="text-xs font-black text-roofing-blue/40 uppercase tracking-widest mb-1">Invoice Number</div>
-                                <div class="text-xl font-black text-roofing-blue tracking-tight">#{{ $invoice->invoice_number }}</div>
+                    <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 group transition-all duration-300">
+                        <!-- Top Header Area (Vertical Flow for Clarity) -->
+                        <div class="mb-5">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="px-2 py-0.5 bg-gray-100 text-roofing-blue/60 text-[9px] font-black uppercase tracking-widest rounded transition-colors group-hover:bg-blue-50">Invoice #</span>
+                                <span class="text-[10px] text-secondary-text font-bold uppercase tracking-wider">{{ \Carbon\Carbon::parse($invoice->date)->format('M d, Y') }}</span>
                             </div>
-                            <div class="text-right">
-                                <div class="text-xs font-black text-roofing-blue/40 uppercase tracking-widest mb-1">Total Amount</div>
-                                <div class="text-xl font-black text-construction-orange tracking-tight">${{ number_format($invoice->amount, 2) }}</div>
+                            <div class="text-xl font-black text-roofing-blue tracking-tighter break-all leading-tight mb-4">
+                                #{{ $invoice->invoice_number }}
+                            </div>
+                            
+                            <div class="bg-orange-50/50 rounded-2xl p-4 flex items-center justify-between border border-orange-50">
+                                <span class="text-xs font-black text-roofing-blue/50 uppercase tracking-widest">Total Amount</span>
+                                <span class="text-2xl font-black text-construction-orange tracking-tighter">${{ number_format($invoice->amount, 2) }}</span>
                             </div>
                         </div>
 
-                        <div class="space-y-3 mb-5 py-4 border-y border-gray-50">
-                            <div class="flex items-center text-sm">
-                                <span class="text-secondary-text font-medium w-20">Tradie:</span>
-                                <div class="flex items-center">
-                                    <div class="h-6 w-6 rounded flex items-center justify-center bg-blue-50 text-roofing-blue text-[8px] font-black mr-2 border border-blue-100">
-                                        {{ strtoupper(substr($invoice->tradie->name, 0, 1)) }}
-                                    </div>
-                                    <span class="font-bold text-roofing-blue">{{ $invoice->tradie->name }}</span>
+                        <!-- Tradie Info Section -->
+                        <div class="flex items-center p-3 bg-gray-50 rounded-xl mb-6">
+                            <span class="text-[9px] font-black uppercase tracking-widest text-roofing-blue/40 w-16">Tradie:</span>
+                            <div class="flex items-center ml-2">
+                                <div class="h-7 w-7 rounded-lg flex items-center justify-center bg-white text-roofing-blue text-[10px] font-black border border-gray-100 shadow-sm mr-2.5">
+                                    {{ strtoupper(substr($invoice->tradie->name, 0, 1)) }}
                                 </div>
-                            </div>
-                            <div class="flex items-center text-sm">
-                                <span class="text-secondary-text font-medium w-20">Issued:</span>
-                                <span class="font-bold text-primary-text">{{ \Carbon\Carbon::parse($invoice->date)->format('M d, Y') }}</span>
+                                <span class="text-sm font-black text-roofing-blue tracking-tight">{{ $invoice->tradie->name }}</span>
                             </div>
                         </div>
 
-                        <div class="flex items-center gap-2">
-                             <a href="{{ route('invoices.show', $invoice) }}" class="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-gray-50 text-roofing-blue text-[9px] uppercase font-black rounded-xl hover:bg-gray-100 transition-colors">
+                        <!-- Refined Action Row -->
+                        <div class="flex items-center gap-2 pt-5 border-t border-gray-50">
+                             <a href="{{ route('invoices.show', $invoice) }}" class="flex-1 flex items-center justify-center gap-2 py-3 bg-roofing-blue text-white text-[10px] uppercase font-black rounded-xl hover:bg-opacity-90 transition-all shadow-md shadow-blue-50">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                 </svg>
                                 View
                             </a>
-                            <a href="{{ route('invoices.download', $invoice) }}" class="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-orange-50 text-construction-orange text-[9px] uppercase font-black rounded-xl hover:bg-orange-100 transition-colors">
+                            <a href="{{ route('invoices.download', $invoice) }}" class="flex-1 flex items-center justify-center gap-2 py-3 bg-orange-50 text-construction-orange text-[10px] uppercase font-black rounded-xl hover:bg-orange-100 transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                 </svg>
@@ -68,9 +69,9 @@
                             </a>
                             <button 
                                 @click="deleteUrl = '{{ route('invoices.destroy', $invoice) }}'; $dispatch('open-modal', 'confirm-delete')"
-                                class="w-10 flex items-center justify-center py-2.5 bg-red-50 text-error-red rounded-xl hover:bg-red-100 transition-colors"
+                                class="w-12 flex items-center justify-center py-3 bg-red-50 text-error-red rounded-xl hover:bg-red-100 transition-colors"
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6" />
                                 </svg>
                             </button>

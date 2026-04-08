@@ -12,9 +12,25 @@ class TradieController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tradies = Tradie::latest()->paginate(10);
+        $query = Tradie::latest();
+
+        if ($request->filled('search')) {
+            $searchTerm = $request->search;
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('name', 'like', '%' . $searchTerm . '%')
+                  ->orWhere('contact_number', 'like', '%' . $searchTerm . '%')
+                  ->orWhere('address', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
+        $tradies = $query->paginate(10)->withQueryString();
+        
+        if ($request->ajax()) {
+            return view('tradies.partials.list', compact('tradies'))->render();
+        }
+
         return view('tradies.index', compact('tradies'));
     }
 
