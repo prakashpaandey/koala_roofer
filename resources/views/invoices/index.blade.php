@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <h2 class="font-black text-2xl text-roofing-blue leading-tight uppercase tracking-tight">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-4 px-4 md:px-0">
+            <h2 class="font-black text-xl md:text-2xl text-roofing-blue leading-tight uppercase tracking-tight">
                 {{ __('Billing & Invoices') }}
             </h2>
-            <a href="{{ route('invoices.create') }}" class="inline-flex items-center px-6 py-3 bg-construction-orange border border-transparent rounded-xl font-bold text-sm text-white uppercase tracking-widest hover:bg-orange-600 active:bg-orange-700 transition ease-in-out duration-150 shadow-lg shadow-orange-100">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <a href="{{ route('invoices.create') }}" class="inline-flex items-center justify-center px-4 md:px-6 py-2 md:py-3 bg-construction-orange border border-transparent rounded-xl font-bold text-xs md:text-sm text-white uppercase tracking-widest hover:bg-orange-600 active:bg-orange-700 transition ease-in-out duration-150 shadow-lg shadow-orange-100">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                 </svg>
                 Create New Invoice
@@ -13,15 +13,78 @@
         </div>
     </x-slot>
 
-    <div class="py-6" x-data="{ deleteUrl: '' }">
-        <div class="max-w-7xl mx-auto">
+    <div class="py-4 md:py-6" x-data="{ deleteUrl: '' }">
+        <div class="max-w-7xl mx-auto px-4 md:px-0">
             @if(session('success'))
-                <div class="mb-6 p-4 bg-success-green/10 border-l-4 border-success-green text-success-green rounded-r-xl font-bold animate-pulse">
+                <div class="mb-4 md:mb-6 p-4 bg-success-green/10 border-l-4 border-success-green text-success-green rounded-r-xl font-bold animate-pulse text-sm">
                     {{ session('success') }}
                 </div>
             @endif
 
-            <div class="bg-white overflow-hidden shadow-sm rounded-2xl border border-gray-100">
+            <!-- Mobile Card Layout -->
+            <div class="grid grid-cols-1 gap-4 md:hidden mb-6">
+                @forelse($invoices as $invoice)
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 group transition-all duration-300">
+                        <div class="flex items-start justify-between mb-4">
+                            <div>
+                                <div class="text-xs font-black text-roofing-blue/40 uppercase tracking-widest mb-1">Invoice Number</div>
+                                <div class="text-xl font-black text-roofing-blue tracking-tight">#{{ $invoice->invoice_number }}</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs font-black text-roofing-blue/40 uppercase tracking-widest mb-1">Total Amount</div>
+                                <div class="text-xl font-black text-construction-orange tracking-tight">${{ number_format($invoice->amount, 2) }}</div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 mb-5 py-4 border-y border-gray-50">
+                            <div class="flex items-center text-sm">
+                                <span class="text-secondary-text font-medium w-20">Tradie:</span>
+                                <div class="flex items-center">
+                                    <div class="h-6 w-6 rounded flex items-center justify-center bg-blue-50 text-roofing-blue text-[8px] font-black mr-2 border border-blue-100">
+                                        {{ strtoupper(substr($invoice->tradie->name, 0, 1)) }}
+                                    </div>
+                                    <span class="font-bold text-roofing-blue">{{ $invoice->tradie->name }}</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <span class="text-secondary-text font-medium w-20">Issued:</span>
+                                <span class="font-bold text-primary-text">{{ \Carbon\Carbon::parse($invoice->date)->format('M d, Y') }}</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                             <a href="{{ route('invoices.show', $invoice) }}" class="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-gray-50 text-roofing-blue text-[9px] uppercase font-black rounded-xl hover:bg-gray-100 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                                View
+                            </a>
+                            <a href="{{ route('invoices.download', $invoice) }}" class="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-orange-50 text-construction-orange text-[9px] uppercase font-black rounded-xl hover:bg-orange-100 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                PDF
+                            </a>
+                            <button 
+                                @click="deleteUrl = '{{ route('invoices.destroy', $invoice) }}'; $dispatch('open-modal', 'confirm-delete')"
+                                class="w-10 flex items-center justify-center py-2.5 bg-red-50 text-error-red rounded-xl hover:bg-red-100 transition-colors"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                @empty
+                    <div class="bg-white p-12 text-center rounded-2xl border border-dashed border-gray-200 text-secondary-text italic uppercase font-bold text-xs tracking-widest">
+                        No invoices generated yet.
+                    </div>
+                @endforelse
+            </div>
+
+            <!-- Table View (Desktop Only) -->
+            <div class="hidden md:block bg-white overflow-hidden shadow-sm rounded-2xl border border-gray-100">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
