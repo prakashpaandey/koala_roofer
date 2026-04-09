@@ -123,9 +123,9 @@
                     <td width="50%" valign="top">
                         <div class="info-title">Bill From</div>
                         <div class="info-content bold">Koala Roofer Management</div>
-                        <div class="info-content">123 Roofer Lane</div>
-                        <div class="info-content">Sydney, NSW 2000</div>
-                        <div class="info-content">Australia</div>
+                        <div class="info-content">123 Narayni Road</div>
+                        <div class="info-content">Narayanghat, Chitwan 4400</div>
+                        <div class="info-content">Nepal</div>
                     </td>
                     <td width="50%" valign="top" align="right">
                         <div>

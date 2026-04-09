@@ -56,8 +56,8 @@
                                 <h3 class="text-xs font-black text-roofing-blue uppercase tracking-widest border-b border-gray-100 pb-2">Issued By</h3>
                                 <div class="text-primary-text space-y-1">
                                     <p class="font-black text-xl text-roofing-blue">Koala Roofer</p>
-                                    <p class="text-sm font-medium text-secondary-text">123 Roofer Way, Sydney</p>
-                                    <p class="text-sm font-medium text-secondary-text">NSW 2000, Australia</p>
+                                    <p class="text-sm font-medium text-secondary-text">123 Narayani Way, Narayanghat</p>
+                                    <p class="text-sm font-medium text-secondary-text">Bharatpur 4400, Nepal</p>
                                     <p class="pt-2 text-sm font-bold text-construction-orange">billing@koalaroofer.com</p>
                                 </div>
                             </div>
