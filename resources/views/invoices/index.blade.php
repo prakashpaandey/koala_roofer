@@ -2,12 +2,12 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-4 px-4 md:px-0">
             <div>
-                <h2 class="font-black text-xl md:text-2xl text-roofing-blue leading-tight uppercase tracking-tight">
+                <h2 class="font-black text-xl md:text-2xl text-roofing-blue dark:text-gray-100 leading-tight uppercase tracking-tight">
                     {{ __('Billing & Invoices') }}
                 </h2>
-                <p class="text-[10px] text-secondary-text font-bold uppercase tracking-widest mt-1">Manage financial records</p>
+                <p class="text-[10px] text-secondary-text dark:text-slate-500 font-bold uppercase tracking-widest mt-1">Manage financial records</p>
             </div>
-            <a href="{{ route('invoices.create') }}" class="inline-flex items-center justify-center px-4 md:px-5 py-2 md:py-2.5 bg-construction-orange border border-transparent rounded-xl font-bold text-[10px] md:text-xs text-white uppercase tracking-widest hover:bg-orange-600 active:bg-orange-700 transition ease-in-out duration-150 shadow-lg shadow-orange-100">
+            <a href="{{ route('invoices.create') }}" class="inline-flex items-center justify-center px-4 md:px-5 py-2 md:py-2.5 bg-construction-orange border border-transparent rounded-xl font-bold text-[10px] md:text-xs text-white uppercase tracking-widest hover:bg-orange-600 active:bg-orange-700 transition ease-in-out duration-150 shadow-lg shadow-orange-100 dark:shadow-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 md:h-4 md:w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                 </svg>
@@ -22,17 +22,17 @@
                 <div class="relative flex-1">
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                         <!-- Dual-state Icon -->
-                        <svg x-show="!searching" class="h-5 w-5 text-slate-400 group-focus-within:text-roofing-blue transition-colors" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg x-show="!searching" class="h-5 w-5 text-slate-400 dark:text-gray-500 group-focus-within:text-roofing-blue dark:group-focus-within:text-blue-400 transition-colors" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
-                        <div x-show="searching" style="display: none;" class="w-5 h-5 border-2 border-roofing-blue/20 border-t-roofing-blue rounded-full animate-spin"></div>
+                        <div x-show="searching" style="display: none;" class="w-5 h-5 border-2 border-roofing-blue/20 dark:border-blue-400/20 border-t-roofing-blue dark:border-t-blue-400 rounded-full animate-spin"></div>
                     </div>
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by invoice # or tradie name..." 
-                        class="block w-full pl-11 pr-12 py-3.5 bg-white border border-slate-100 rounded-[1.5rem] text-sm font-semibold text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-slate-100/50 focus:border-roofing-blue/30 transition-all shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]"
+                        class="block w-full pl-11 pr-12 py-3.5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[1.5rem] text-sm font-semibold text-slate-700 dark:text-gray-300 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-4 focus:ring-slate-100/50 dark:focus:ring-slate-800/50 focus:border-roofing-blue/30 dark:focus:border-blue-400/30 transition-all shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]"
                         @input.debounce.500ms="window.dispatchEvent(new CustomEvent('perform-search'))">
                     
                     @if(request('search'))
-                        <a href="{{ route('invoices.index') }}" class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-300 hover:text-error-red transition-colors">
+                        <a href="{{ route('invoices.index') }}" class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-300 dark:text-slate-600 hover:text-error-red dark:hover:text-red-400 transition-colors">
                             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>

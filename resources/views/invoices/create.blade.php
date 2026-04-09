@@ -14,8 +14,8 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto">
-            <div class="bg-white overflow-hidden shadow-sm rounded-2xl border border-gray-100">
-                <div class="p-8 md:p-12">
+            <div class="bg-white dark:bg-transparent overflow-hidden shadow-sm dark:shadow-none rounded-2xl border border-gray-100 dark:border-transparent transition-colors duration-300">
+                <div class="p-8 md:p-12 md:px-0">
                     @if($tradies->isEmpty())
                         <div class="p-10 bg-warning-yellow/10 border-2 border-dashed border-warning-yellow rounded-2xl text-center">
                             <div class="flex flex-col items-center max-w-sm mx-auto">
@@ -88,12 +88,12 @@
                             <!-- Left Column: Primary Details -->
                             <div class="lg:col-span-4 space-y-4 md:space-y-6">
                                 <!-- Section: Customer & Invoice Details -->
-                                <div class="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-5 md:p-6 space-y-5">
-                                    <div class="border-b border-slate-50 pb-3 flex items-center gap-3">
-                                        <div class="p-1.5 bg-blue-50 text-roofing-blue rounded-lg">
+                                <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-800 p-5 md:p-6 space-y-5 transition-colors duration-300">
+                                    <div class="border-b border-slate-50 dark:border-slate-800 pb-3 flex items-center gap-3">
+                                        <div class="p-1.5 bg-blue-50 dark:bg-slate-800 text-roofing-blue dark:text-blue-400 rounded-lg">
                                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                                         </div>
-                                        <h3 class="text-[11px] font-black text-roofing-blue uppercase tracking-widest">Client & ID</h3>
+                                        <h3 class="text-[11px] font-black text-roofing-blue dark:text-gray-200 uppercase tracking-widest">Client & ID</h3>
                                     </div>
                                     
                                     <div class="space-y-4">
@@ -101,36 +101,36 @@
                                         
                                         <div class="grid grid-cols-2 gap-3">
                                             <div class="group">
-                                                <x-input-label for="invoice_number" :value="__('Invoice #')" class="text-[9px] font-bold uppercase text-slate-400 mb-1" />
-                                                <x-text-input id="invoice_number" class="block w-full border-slate-200 bg-slate-50/30 focus:bg-white text-xs font-bold py-2" type="text" name="invoice_number" :value="old('invoice_number', '#KR-' . rand(1000, 9999))" required />
+                                                <x-input-label for="invoice_number" :value="__('Invoice #')" class="text-[9px] font-bold uppercase text-slate-400 dark:text-slate-500 mb-1" />
+                                                <x-text-input id="invoice_number" class="block w-full border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-950/50 focus:bg-white dark:focus:bg-slate-900 text-xs font-bold py-2 dark:text-gray-300" type="text" name="invoice_number" :value="old('invoice_number', '#KR-' . rand(1000, 9999))" required />
                                             </div>
                                             <div class="group">
-                                                <x-input-label for="date" :value="__('Date')" class="text-[9px] font-bold uppercase text-slate-400 mb-1" />
-                                                <x-text-input id="date" class="block w-full border-slate-200 bg-slate-50/30 focus:bg-white text-xs font-bold text-roofing-blue py-2" type="date" name="date" :value="old('date', date('Y-m-d'))" required />
+                                                <x-input-label for="date" :value="__('Date')" class="text-[9px] font-bold uppercase text-slate-400 dark:text-slate-500 mb-1" />
+                                                <x-text-input id="date" class="block w-full border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-950/50 focus:bg-white dark:focus:bg-slate-900 text-xs font-bold text-roofing-blue dark:text-blue-400 py-2" type="date" name="date" :value="old('date', date('Y-m-d'))" required />
                                             </div>
                                         </div>
 
                                         <!-- Tax Configuration: Compact -->
-                                        <div class="bg-blue-50/30 rounded-xl p-3 border border-blue-100/50">
+                                        <div class="bg-blue-50/30 dark:bg-slate-800/30 rounded-xl p-3 border border-blue-100/50 dark:border-slate-700/50">
                                              <div class="flex items-center justify-between mb-1.5">
-                                                <x-input-label for="tax_input" :value="__('Tax (%)')" class="text-[8px] font-black uppercase text-roofing-blue" />
+                                                <x-input-label for="tax_input" :value="__('Tax (%)')" class="text-[8px] font-black uppercase text-roofing-blue dark:text-blue-400" />
                                                 <button type="button" @click="setPermanentTax()" 
-                                                    class="text-[7px] font-black uppercase tracking-widest text-roofing-blue hover:text-construction-orange transition-colors"
+                                                    class="text-[7px] font-black uppercase tracking-widest text-roofing-blue dark:text-blue-400 hover:text-construction-orange dark:hover:text-construction-orange transition-colors"
                                                     :disabled="is_saving_tax">
                                                     <span x-text="is_saving_tax ? '...' : 'Set Permanent'"></span>
                                                 </button>
                                              </div>
-                                             <x-text-input id="tax_input" class="block w-full border-white bg-white/80 focus:bg-white text-xs font-black text-roofing-blue py-1.5" type="number" step="0.1" x-model="tax_percentage" />
+                                             <x-text-input id="tax_input" class="block w-full border-white dark:border-slate-700 bg-white/80 dark:bg-slate-900 focus:bg-white dark:focus:bg-slate-800 text-xs font-black text-roofing-blue dark:text-gray-100 py-1.5" type="number" step="0.1" x-model="tax_percentage" />
                                          </div>
 
                                         <div class="group">
-                                            <x-input-label for="customer_name" :value="__('Customer')" class="text-[9px] font-bold uppercase text-slate-400 mb-1" />
-                                            <x-text-input id="customer_name" class="block w-full border-slate-200 bg-slate-50/30 focus:bg-white text-xs font-bold py-2" type="text" name="customer_name" :value="old('customer_name')" required placeholder="Steve Smith" />
+                                            <x-input-label for="customer_name" :value="__('Customer')" class="text-[9px] font-bold uppercase text-slate-400 dark:text-slate-500 mb-1" />
+                                            <x-text-input id="customer_name" class="block w-full border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-950/50 focus:bg-white dark:focus:bg-slate-900 text-xs font-bold py-2 dark:text-gray-300" type="text" name="customer_name" :value="old('customer_name')" required placeholder="Steve Smith" />
                                         </div>
 
                                         <div class="group">
-                                            <x-input-label for="customer_address" :value="__('Address')" class="text-[9px] font-bold uppercase text-slate-400 mb-1" />
-                                            <textarea id="customer_address" name="customer_address" rows="2" class="block w-full border-slate-200 bg-slate-50/30 focus:bg-white focus:border-construction-orange focus:ring-construction-orange rounded-xl text-xs font-bold transition-all py-2" required placeholder="Street, City, P.C.">{{ old('customer_address') }}</textarea>
+                                            <x-input-label for="customer_address" :value="__('Address')" class="text-[9px] font-bold uppercase text-slate-400 dark:text-slate-500 mb-1" />
+                                            <textarea id="customer_address" name="customer_address" rows="2" class="block w-full border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-950/50 focus:bg-white dark:focus:bg-slate-900 focus:border-construction-orange focus:ring-construction-orange rounded-xl text-xs font-bold transition-all py-2 dark:text-gray-300" required placeholder="Street, City, P.C.">{{ old('customer_address') }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -138,15 +138,15 @@
 
                             <!-- Right Column: Line Items & Summary -->
                             <div class="lg:col-span-8 flex flex-col gap-4 md:gap-6">
-                                <div class="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-5 md:p-6 flex-1 flex flex-col min-h-[400px]">
-                                    <div class="border-b border-slate-50 pb-3 flex items-center justify-between mb-4">
+                                <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-800 p-5 md:p-6 flex-1 flex flex-col min-h-[400px] transition-colors duration-300">
+                                    <div class="border-b border-slate-50 dark:border-slate-800 pb-3 flex items-center justify-between mb-4">
                                         <div class="flex items-center gap-3">
-                                            <div class="p-1.5 bg-orange-50 text-construction-orange rounded-lg">
+                                            <div class="p-1.5 bg-orange-50 dark:bg-slate-800 text-construction-orange rounded-lg">
                                                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                                             </div>
-                                            <h3 class="text-[11px] font-black text-roofing-blue uppercase tracking-widest">Work Breakdown</h3>
+                                            <h3 class="text-[11px] font-black text-roofing-blue dark:text-gray-200 uppercase tracking-widest">Work Breakdown</h3>
                                         </div>
-                                        <button type="button" @click="addItem()" class="flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-roofing-blue text-[10px] font-black rounded-lg hover:bg-roofing-blue hover:text-white transition-all transform active:scale-95 uppercase tracking-tighter">
+                                        <button type="button" @click="addItem()" class="flex items-center gap-2 px-3 py-1.5 bg-blue-50 dark:bg-slate-800 text-roofing-blue dark:text-blue-400 text-[10px] font-black rounded-lg hover:bg-roofing-blue dark:hover:bg-slate-700 hover:text-white transition-all transform active:scale-95 uppercase tracking-tighter">
                                             <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
                                             Add Service
                                         </button>
@@ -154,36 +154,36 @@
 
                                     <!-- Service Table Header (Hidden on Mobile) -->
                                     <div class="hidden md:grid grid-cols-12 gap-3 px-4 mb-2">
-                                        <div class="col-span-1 text-[8px] font-black text-slate-400 uppercase">S.N.</div>
-                                        <div class="col-span-8 text-[8px] font-black text-slate-400 uppercase">Description of Service</div>
-                                        <div class="col-span-2 text-[8px] font-black text-slate-400 uppercase text-right">Amount ($)</div>
+                                        <div class="col-span-1 text-[8px] font-black text-slate-400 dark:text-slate-500 uppercase">S.N.</div>
+                                        <div class="col-span-8 text-[8px] font-black text-slate-400 dark:text-slate-500 uppercase">Description of Service</div>
+                                        <div class="col-span-2 text-[8px] font-black text-slate-400 dark:text-slate-500 uppercase text-right">Amount ($)</div>
                                         <div class="col-span-1"></div>
                                     </div>
 
                                     <!-- Scrollable Items Area -->
                                     <div class="space-y-2 flex-1 overflow-y-auto pr-1 custom-scrollbar" style="max-height: 450px;">
                                         <template x-for="(item, index) in items" :key="index">
-                                            <div class="group flex flex-col md:grid md:grid-cols-12 md:items-center gap-2 md:gap-3 p-3 md:p-2 bg-slate-50/50 md:bg-transparent rounded-xl md:rounded-none border border-slate-100 md:border-0 md:border-b md:border-slate-50 relative hover:bg-slate-50/80 transition-colors">
+                                            <div class="group flex flex-col md:grid md:grid-cols-12 md:items-center gap-2 md:gap-3 p-3 md:p-2 bg-slate-50/50 md:bg-transparent dark:bg-slate-950/30 md:dark:bg-transparent rounded-xl md:rounded-none border border-slate-100 md:border-0 md:border-b dark:border-slate-800 md:dark:border-slate-800/50 relative hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition-colors">
                                                 <!-- MOBILE LABELS & S.N. -->
                                                 <div class="md:col-span-1 flex items-center justify-between">
-                                                    <span class="text-[10px] md:text-xs font-black text-slate-300" x-text="(index + 1) + '.'"></span>
-                                                    <span class="md:hidden text-[7px] font-black uppercase text-slate-400">Item Details</span>
+                                                    <span class="text-[10px] md:text-xs font-black text-slate-300 dark:text-slate-600" x-text="(index + 1) + '.'"></span>
+                                                    <span class="md:hidden text-[7px] font-black uppercase text-slate-400 dark:text-slate-500">Item Details</span>
                                                 </div>
 
                                                 <!-- DESCRIPTION -->
                                                 <div class="md:col-span-8">
                                                     <input type="text" :name="`items[${index}][description]`" x-model="item.description" required
-                                                        class="block w-full bg-white border-slate-200 focus:border-construction-orange focus:ring-1 focus:ring-construction-orange rounded-lg text-xs font-bold py-2 px-3 transition-all"
+                                                        class="block w-full bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 focus:border-construction-orange focus:ring-1 focus:ring-construction-orange rounded-lg text-xs font-bold py-2 px-3 transition-all dark:text-gray-300"
                                                         placeholder="e.g. Roof Inspection & Repair">
                                                 </div>
 
                                                 <!-- AMOUNT -->
                                                 <div class="md:col-span-2 flex items-center gap-2">
-                                                    <span class="md:hidden text-[7px] font-black uppercase text-slate-400">Amount:</span>
+                                                    <span class="md:hidden text-[7px] font-black uppercase text-slate-400 dark:text-slate-500">Amount:</span>
                                                     <div class="relative w-full">
-                                                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-slate-300">$</span>
+                                                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-slate-300 dark:text-slate-600">$</span>
                                                         <input type="number" step="0.01" :name="`items[${index}][amount]`" x-model="item.amount" required
-                                                            class="block w-full bg-slate-50 border-slate-200 focus:border-construction-orange focus:ring-1 focus:ring-construction-orange rounded-lg text-[13px] font-black text-roofing-blue text-right py-2 pl-7 pr-3 transition-all"
+                                                            class="block w-full bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 focus:border-construction-orange focus:ring-1 focus:ring-construction-orange rounded-lg text-[13px] font-black text-roofing-blue dark:text-gray-200 text-right py-2 pl-7 pr-3 transition-all"
                                                             placeholder="0.00">
                                                     </div>
                                                 </div>
@@ -191,7 +191,7 @@
                                                 <!-- REMOVE ACTION -->
                                                 <div class="md:col-span-1 flex justify-end">
                                                     <button type="button" @click="removeItem(index)" x-show="items.length > 1"
-                                                        class="p-1.5 text-slate-300 hover:text-error-red transition-colors rounded-lg hover:bg-red-50">
+                                                        class="p-1.5 text-slate-300 dark:text-slate-600 hover:text-error-red dark:hover:text-red-400 transition-colors rounded-lg hover:bg-red-50 dark:hover:bg-red-950/30">
                                                         <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                                                     </button>
                                                 </div>
@@ -200,19 +200,19 @@
                                     </div>
 
                                     <!-- Summary Row inside Card -->
-                                    <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                    <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
                                         <div class="flex gap-4 items-center">
                                             <div class="text-right">
-                                                <p class="text-[7px] font-black text-slate-400 uppercase tracking-widest">Subtotal</p>
-                                                <p class="text-xs font-black text-roofing-blue">$<span x-text="subtotal().toLocaleString(undefined, {minimumFractionDigits: 2})">0.00</span></p>
+                                                <p class="text-[7px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Subtotal</p>
+                                                <p class="text-xs font-black text-roofing-blue dark:text-gray-200">$<span x-text="subtotal().toLocaleString(undefined, {minimumFractionDigits: 2})">0.00</span></p>
                                             </div>
-                                            <div class="text-right border-l border-slate-100 pl-4">
-                                                <p class="text-[7px] font-black text-slate-400 uppercase tracking-widest">Tax (<span x-text="tax_percentage"></span>%)</p>
-                                                <p class="text-xs font-black text-roofing-blue">$<span x-text="taxAmount().toLocaleString(undefined, {minimumFractionDigits: 2})">0.00</span></p>
+                                            <div class="text-right border-l border-slate-100 dark:border-slate-800 pl-4">
+                                                <p class="text-[7px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Tax (<span x-text="tax_percentage"></span>%)</p>
+                                                <p class="text-xs font-black text-roofing-blue dark:text-gray-200">$<span x-text="taxAmount().toLocaleString(undefined, {minimumFractionDigits: 2})">0.00</span></p>
                                             </div>
                                         </div>
 
-                                        <div class="bg-roofing-blue rounded-2xl px-6 py-3 text-white flex items-center justify-between md:justify-end md:gap-8 flex-1 md:flex-none">
+                                        <div class="bg-roofing-blue dark:bg-slate-800 rounded-2xl px-6 py-3 text-white flex items-center justify-between md:justify-end md:gap-8 flex-1 md:flex-none">
                                             <span class="text-[8px] font-black uppercase tracking-widest opacity-60">Grand Total</span>
                                             <div class="flex items-baseline gap-1">
                                                 <span class="text-xs font-bold opacity-40">$</span>
@@ -225,8 +225,8 @@
                         </div>
 
                         <div class="flex flex-col md:flex-row items-center justify-end gap-3 md:gap-6 pb-10">
-                            <a href="{{ route('invoices.index') }}" class="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-roofing-blue transition-colors">Cancel Draft</a>
-                            <x-primary-button class="w-full md:w-auto px-12 py-3.5 shadow-xl shadow-orange-100 rounded-2xl text-xs">
+                            <a href="{{ route('invoices.index') }}" class="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 hover:text-roofing-blue dark:hover:text-gray-200 transition-colors">Cancel Draft</a>
+                            <x-primary-button class="w-full md:w-auto px-12 py-3.5 shadow-xl shadow-orange-100 dark:shadow-none rounded-2xl text-xs uppercase tracking-widest">
                                 {{ __('Generate & Save Invoice') }}
                             </x-primary-button>
                         </div>

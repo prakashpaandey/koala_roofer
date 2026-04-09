@@ -14,12 +14,22 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <script>
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark')
+            } else {
+                document.documentElement.classList.remove('dark')
+            }
+        </script>
     </head>
-    <body class="font-sans antialiased text-primary-text bg-soft-gray">
-        <div x-data="{ sidebarOpen: false }" class="flex h-screen overflow-hidden">
+    <body class="font-sans antialiased text-primary-text bg-soft-gray dark:bg-slate-900 dark:text-gray-100 transition-colors duration-300">
+        <div x-data="{ sidebarOpen: false, darkMode: localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) }" 
+             :class="{ 'dark': darkMode }"
+             class="flex h-screen overflow-hidden">
             <!-- Sidebar -->
-            <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" class="fixed inset-y-0 left-0 z-50 w-64 bg-roofing-blue text-white transition-transform duration-300 transform lg:translate-x-0 lg:static lg:inset-0 shadow-2xl">
-                <div class="flex flex-col h-full">
+            <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" class="fixed inset-y-0 left-0 z-50 w-64 bg-roofing-blue dark:bg-slate-950 text-white transition-transform duration-300 transform lg:translate-x-0 lg:static lg:inset-0 shadow-2xl">
+                <div class="flex flex-col h-full uppercase">
                     <!-- Sidebar Header / Logo -->
                     <div class="flex items-center justify-center h-20 border-b border-white/10 px-6">
                         <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
@@ -46,8 +56,8 @@
                     </nav>
 
                     <!-- Sidebar Footer -->
-                    <div class="p-4 border-t border-white/10 text-xs text-center text-white/50">
-                        &copy; {{ date('Y') }} KoalaRoofer v1.0
+                    <div class="p-4 border-t border-white/10 text-[8px] text-center text-white/30 tracking-widest font-black">
+                        &copy; {{ date('Y') }} KOALAROOFER v1.0
                     </div>
                 </div>
             </aside>
@@ -58,7 +68,7 @@
 
                 <!-- Page Header (Optional Breadcrumbs/Title) -->
                 @isset($header)
-                    <div class="bg-white px-6 py-4 border-b border-gray-200">
+                    <div class="bg-white dark:bg-slate-900 px-6 py-4 border-b border-gray-200 dark:border-slate-800 transition-colors duration-300">
                         <div class="max-w-7xl">
                             {{ $header }}
                         </div>
@@ -66,13 +76,13 @@
                 @endisset
 
                 <!-- Main Content Area -->
-                <main class="flex-1 overflow-y-auto p-6 bg-soft-gray">
+                <main class="flex-1 overflow-y-auto p-6 bg-soft-gray dark:bg-slate-950 transition-colors duration-300">
                     {{ $slot }}
                 </main>
             </div>
 
             <!-- Mobile Overlay -->
-            <div x-show="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden transition-opacity duration-300"></div>
+            <div x-show="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden transition-opacity duration-300"></div>
         </div>
     </body>
 </html>

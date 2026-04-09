@@ -1,8 +1,3 @@
-<div class="flex items-center gap-2 {{ $attributes->get('class') }}">
-    <div class="bg-construction-orange p-2 rounded-lg shadow-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-        </svg>
-    </div>
-    <span class="text-2xl font-black tracking-tight text-roofing-blue uppercase">Koala<span class="text-construction-orange">Roofer</span></span>
+<div class="flex items-center justify-center {{ $attributes->get('class') }}">
+    <img src="{{ asset('logo.png') }}" alt="Koala Roofer" class="h-16 w-auto object-contain drop-shadow-sm filter brightness-0 dark:invert transition-all duration-300 opacity-90 hover:opacity-100">
 </div>

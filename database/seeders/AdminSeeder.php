@@ -13,10 +13,10 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         \App\Models\User::updateOrCreate(
-            ['email' => 'prakashpandey@gmail.com'],
+            ['email' => 'info@bihanitech.com'],
             [
-                'name' => 'Prakash Pandey',
-                'password' => \Illuminate\Support\Facades\Hash::make('prakashpandey'),
+                'name' => 'Bihani Tech',
+                'password' => \Illuminate\Support\Facades\Hash::make('bihanitech1234'),
                 'email_verified_at' => now(),
             ]
         );
