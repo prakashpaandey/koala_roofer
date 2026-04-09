@@ -158,10 +158,11 @@
                 <tr>
                     <td width="55%" valign="top">
                         <div class="info-title">Bill From</div>
-                        <div class="info-content bold" style="color: #4f46e5;">Koala Roofer Management</div>
-                        <div class="info-content">123 Narayani Way</div>
-                        <div class="info-content">Bharatpur, Chitwan 4400, Nepal</div>
+                        <div class="info-content bold" style="color: #4f46e5;">Koalaroofers Pty Limited</div>
+                        <div class="info-content">10/21 Colbee Ct, Phillip</div>
+                        <div class="info-content">ACT 2606, Australia</div>
                         <div class="info-content" style="color: #f97316; font-weight: bold; margin-top: 5px;">billing@koalaroofer.com</div>
+                        <div class="info-content" style="font-weight: bold; margin-top: 2px;">+61 452 456 626</div>
                     </td>
                     <td width="45%" valign="top" align="right">
                         <div>

@@ -55,10 +55,11 @@
                             <div class="space-y-4">
                                 <h3 class="text-xs font-black text-roofing-blue dark:text-gray-200 uppercase tracking-widest border-b border-gray-100 dark:border-slate-800 pb-2">Issued By</h3>
                                 <div class="text-primary-text space-y-1">
-                                    <p class="font-black text-xl text-roofing-blue dark:text-gray-100">Koala Roofer</p>
-                                    <p class="text-sm font-medium text-secondary-text dark:text-gray-400">123 Narayani Way, Narayanghat</p>
-                                    <p class="text-sm font-medium text-secondary-text dark:text-gray-400">Bharatpur 4400, Nepal</p>
+                                    <p class="font-black text-xl text-roofing-blue dark:text-gray-100">Koalaroofers Pty Limited</p>
+                                    <p class="text-sm font-medium text-secondary-text dark:text-gray-400">10/21 Colbee Ct, Phillip</p>
+                                    <p class="text-sm font-medium text-secondary-text dark:text-gray-400">ACT 2606, Australia</p>
                                     <p class="pt-2 text-sm font-bold text-construction-orange dark:text-orange-400">billing@koalaroofer.com</p>
+                                    <p class="text-sm font-bold text-secondary-text dark:text-gray-400">+61 452 456 626</p>
                                 </div>
                             </div>
                             <div class="space-y-4">
