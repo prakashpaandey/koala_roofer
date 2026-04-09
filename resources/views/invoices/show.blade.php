@@ -29,10 +29,10 @@
                     <!-- Invoice Header Section -->
                     <div class="bg-roofing-blue px-10 py-12 text-white flex flex-col md:flex-row justify-between items-start md:items-center gap-8 relative overflow-hidden">
                         <div class="relative z-10">
-                            <h1 class="text-4xl font-black uppercase tracking-tighter mb-1">Invoice</h1>
-                            <div class="flex items-center gap-2 text-blue-200 font-bold uppercase tracking-widest text-xs">
+                            <img src="{{ asset('logo.png') }}" alt="Koala Roofer" class="h-16 w-auto mb-2 filter brightness-0 invert">
+                            <div class="flex items-center gap-2 text-blue-200 font-bold uppercase tracking-widest text-[10px]">
                                 <span class="w-8 h-px bg-construction-orange"></span>
-                                Koala Roofer Management
+                                Professional Management
                             </div>
                         </div>
                         <div class="text-left md:text-right relative z-10">

@@ -6,6 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}?v=2">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -22,12 +23,7 @@
                     <!-- Sidebar Header / Logo -->
                     <div class="flex items-center justify-center h-20 border-b border-white/10 px-6">
                         <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
-                            <div class="bg-construction-orange p-1.5 rounded shadow-inner">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                </svg>
-                            </div>
-                            <span class="text-xl font-black tracking-tighter uppercase whitespace-nowrap">Koala<span class="text-construction-orange">Roofer</span></span>
+                            <img src="{{ asset('logo.png') }}" alt="Koala Roofer" class="h-10 w-auto filter brightness-0 invert">
                         </a>
                     </div>
 

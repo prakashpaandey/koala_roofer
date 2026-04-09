@@ -154,8 +154,7 @@
             <table>
                 <tr>
                     <td>
-                        <div class="logo">Koala Roofer</div>
-                        <div class="info-content" style="color: #64748b; font-weight: bold;">Professional Management System</div>
+                        <img src="{{ public_path('logo.png') }}" style="height: 60px; width: auto; margin-bottom: 5px;">
                     </td>
                     <td class="invoice-label">Invoice</td>
                 </tr>
