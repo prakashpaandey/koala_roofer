@@ -31,14 +31,14 @@
                 <span class="text-2xl font-black text-construction-orange tracking-tighter transition-transform group-hover:scale-105 duration-500">${{ number_format($invoice->amount, 2) }}</span>
             </div>
 
-            <!-- Tradie Assignment (Blue Branded) -->
+            <!-- Customer Info (Blue Branded) -->
             <div class="flex items-center p-3 bg-slate-50/50 rounded-2xl mb-5 border border-dashed border-slate-200/60">
                 <div class="h-8 w-8 rounded-xl flex items-center justify-center bg-white text-roofing-blue text-[10px] font-black border border-slate-100 shadow-sm mr-3">
-                    {{ strtoupper(substr($invoice->tradie->name, 0, 1)) }}
+                    {{ strtoupper(substr($invoice->customer_name ?? $invoice->tradie->name ?? '?', 0, 1)) }}
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-[8px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Assigned Tradie</span>
-                    <span class="text-sm font-extrabold text-roofing-blue tracking-tight">{{ $invoice->tradie->name }}</span>
+                    <span class="text-[8px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Customer</span>
+                    <span class="text-sm font-extrabold text-roofing-blue tracking-tight">{{ $invoice->customer_name ?? $invoice->tradie->name }}</span>
                 </div>
             </div>
 
@@ -73,7 +73,7 @@
             <thead>
                 <tr class="bg-roofing-blue text-white uppercase text-[10px] tracking-widest font-black">
                     <th class="px-8 py-5">Invoice #</th>
-                    <th class="px-8 py-5">Tradie</th>
+                    <th class="px-8 py-5">Customer</th>
                     <th class="px-8 py-5">Issue Date</th>
                     <th class="px-8 py-5 text-center">Total Amount</th>
                     <th class="px-8 py-5 text-right whitespace-nowrap">Actions</th>
@@ -88,9 +88,9 @@
                         <td class="px-8 py-5">
                             <div class="flex items-center">
                                 <div class="h-9 w-9 flex-shrink-0 rounded-xl bg-slate-50 flex items-center justify-center text-roofing-blue font-black text-[11px] border border-slate-100 uppercase tracking-tighter">
-                                    {{ strtoupper(substr($invoice->tradie->name, 0, 1)) }}
+                                    {{ strtoupper(substr($invoice->customer_name ?? $invoice->tradie->name ?? '?', 0, 1)) }}
                                 </div>
-                                <span class="ml-4 text-[13px] font-bold text-slate-700">{{ $invoice->tradie->name }}</span>
+                                <span class="ml-4 text-[13px] font-bold text-slate-700">{{ $invoice->customer_name ?? $invoice->tradie->name ?? 'Unknown' }}</span>
                             </div>
                         </td>
                         <td class="px-8 py-5 text-xs text-slate-500 font-medium">

@@ -62,40 +62,59 @@
                                 </div>
                             </div>
                             <div class="space-y-4">
-                                <h3 class="text-xs font-black text-roofing-blue uppercase tracking-widest border-b border-gray-100 pb-2">Issued To (Tradie)</h3>
+                                <h3 class="text-xs font-black text-roofing-blue uppercase tracking-widest border-b border-gray-100 pb-2">Client Details</h3>
                                 <div class="text-primary-text space-y-1">
-                                    <p class="font-black text-xl text-roofing-blue">{{ $invoice->tradie->name }}</p>
-                                    <p class="text-sm font-medium text-secondary-text">{{ $invoice->tradie->address ?: 'No address provided' }}</p>
-                                    <p class="pt-2 text-sm font-bold text-construction-orange">{{ $invoice->tradie->contact_number }}</p>
+                                    <p class="font-black text-xl text-roofing-blue">{{ $invoice->customer_name }}</p>
+                                    <p class="text-sm font-medium text-secondary-text whitespace-pre-line">{{ $invoice->customer_address ?: 'No address provided' }}</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Work Description Card -->
-                        <div class="bg-soft-gray p-8 rounded-2xl border border-gray-100 shadow-inner">
-                            <h3 class="text-xs font-black text-roofing-blue uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <!-- Work Items Table -->
+                        <div class="space-y-4">
+                             <h3 class="text-xs font-black text-roofing-blue uppercase tracking-widest border-b border-gray-100 pb-2 flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
-                                Work Summary
+                                Work Breakdown
                             </h3>
-                            <div class="text-primary-text leading-relaxed font-medium whitespace-pre-wrap">{{ $invoice->work_description }}</div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left">
+                                    <thead>
+                                        <tr class="bg-soft-gray rounded-xl overflow-hidden">
+                                            <th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-roofing-blue rounded-l-xl">Service Description</th>
+                                            <th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-roofing-blue text-right rounded-r-xl w-32">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-50">
+                                        @if(is_array($invoice->items))
+                                            @foreach($invoice->items as $item)
+                                                <tr class="group hover:bg-slate-50 transition-colors">
+                                                    <td class="px-6 py-5 text-sm font-bold text-roofing-blue/80">{{ $item['description'] }}</td>
+                                                    <td class="px-6 py-5 text-sm font-black text-roofing-blue text-right">${{ number_format($item['amount'], 2) }}</td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td class="px-6 py-5 text-sm font-medium text-secondary-text italic">{{ $invoice->work_description }}</td>
+                                                <td class="px-6 py-5 text-sm font-black text-roofing-blue text-right">${{ number_format($invoice->amount, 2) }}</td>
+                                            </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
                         <!-- Financial Calculation -->
-                        <div class="flex justify-end pt-8">
-                            <div class="w-full md:w-72 space-y-4">
-                                <div class="flex justify-between items-center text-secondary-text font-bold uppercase text-xs tracking-widest">
+                        <div class="flex justify-end pt-8 border-t border-slate-50">
+                            <div class="w-full md:w-80 space-y-4">
+                                <div class="flex justify-between items-center text-secondary-text font-bold uppercase text-[10px] tracking-widest">
                                     <span>Subtotal</span>
-                                    <span class="text-primary-text">${{ number_format($invoice->amount, 2) }}</span>
+                                    <span class="text-primary-text font-black text-sm">${{ number_format($invoice->amount, 2) }}</span>
                                 </div>
-                                <div class="flex justify-between items-center text-secondary-text font-bold uppercase text-xs tracking-widest border-b border-gray-100 pb-4">
-                                    <span>Tax (0%)</span>
-                                    <span class="text-primary-text">$0.00</span>
-                                </div>
-                                <div class="flex justify-between items-center bg-roofing-blue text-white px-6 py-5 rounded-2xl shadow-xl shadow-blue-100">
-                                    <span class="text-xs font-black uppercase tracking-widest">Total Pay</span>
-                                    <span class="text-3xl font-black tracking-tighter">${{ number_format($invoice->amount, 2) }}</span>
+                                <div class="flex justify-between items-center bg-roofing-blue text-white px-8 py-6 rounded-2xl shadow-xl shadow-blue-100 transform hover:scale-[1.02] transition-transform">
+                                    <span class="text-[10px] font-black uppercase tracking-widest opacity-70">Total Bill</span>
+                                    <span class="text-4xl font-black tracking-tighter">${{ number_format($invoice->amount, 2) }}</span>
                                 </div>
                             </div>
                         </div>

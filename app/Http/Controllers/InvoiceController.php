@@ -49,12 +49,18 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'tradie_id' => 'required|exists:tradies,id',
             'invoice_number' => 'required|string|unique:invoices,invoice_number',
             'date' => 'required|date',
-            'work_description' => 'required|string',
-            'amount' => 'required|numeric|min:0',
+            'customer_name' => 'required|string|max:255',
+            'customer_address' => 'required|string',
+            'items' => 'required|array|min:1',
+            'items.*.description' => 'required|string',
+            'items.*.amount' => 'required|numeric|min:0',
         ]);
+
+        // Calculate total amount from items
+        $totalAmount = collect($request->items)->sum('amount');
+        $validated['amount'] = $totalAmount;
 
         Invoice::create($validated);
 

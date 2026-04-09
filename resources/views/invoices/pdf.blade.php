@@ -101,6 +101,51 @@
             border-top: 1px solid #f1f5f9;
             padding-top: 20px;
         }
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        .items-table th {
+            background-color: #f1f5f9;
+            color: #4f46e5;
+            text-align: left;
+            padding: 12px;
+            font-size: 10px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .items-table td {
+            padding: 15px 12px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 13px;
+            color: #334155;
+        }
+        .items-table .amount {
+            text-align: right;
+            font-weight: bold;
+        }
+        .total-section {
+            margin-top: 30px;
+            text-align: right;
+        }
+        .total-box {
+            display: inline-block;
+            width: 250px;
+            background-color: #1e1b4b;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: 900;
+        }
+        .total-label {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
@@ -110,7 +155,7 @@
                 <tr>
                     <td>
                         <div class="logo">Koala Roofer</div>
-                        <div class="info-content">Premium Roofing Services</div>
+                        <div class="info-content" style="color: #64748b; font-weight: bold;">Professional Management System</div>
                     </td>
                     <td class="invoice-label">Invoice</td>
                 </tr>
@@ -118,47 +163,66 @@
         </div>
 
         <div class="info-section">
-            <table>
+            <table width="100%">
                 <tr>
-                    <td width="50%" valign="top">
+                    <td width="55%" valign="top">
                         <div class="info-title">Bill From</div>
-                        <div class="info-content bold">Koala Roofer Management</div>
-                        <div class="info-content">123 Narayni Road</div>
-                        <div class="info-content">Narayanghat, Chitwan 4400</div>
-                        <div class="info-content">Nepal</div>
+                        <div class="info-content bold" style="color: #4f46e5;">Koala Roofer Management</div>
+                        <div class="info-content">123 Narayani Way</div>
+                        <div class="info-content">Bharatpur, Chitwan 4400, Nepal</div>
+                        <div class="info-content" style="color: #f97316; font-weight: bold; margin-top: 5px;">billing@koalaroofer.com</div>
                     </td>
-                    <td width="50%" valign="top" align="right">
+                    <td width="45%" valign="top" align="right">
                         <div>
-                            <span class="info-title">Invoice Number:</span>
-                            <span class="info-content bold">{{ $invoice->invoice_number }}</span>
+                            <span class="info-title">Invoice Number:</span><br>
+                            <span class="info-content bold" style="font-size: 20px;">#{{ $invoice->invoice_number }}</span>
                         </div>
-                        <div style="margin-top: 10px;">
-                            <span class="info-title">Date:</span>
-                            <span class="info-content">{{ \Carbon\Carbon::parse($invoice->date)->format('d M Y') }}</span>
+                        <div style="margin-top: 15px;">
+                            <span class="info-title">Date of Issue:</span><br>
+                            <span class="info-content">{{ \Carbon\Carbon::parse($invoice->date)->format('d M, Y') }}</span>
                         </div>
                     </td>
                 </tr>
             </table>
         </div>
 
-        <div class="info-section">
-            <div class="info-title">Bill To (Tradie)</div>
-            <div class="info-content bold">{{ $invoice->tradie->name }}</div>
-            <div class="info-content">{{ $invoice->tradie->address ?: 'No address provided' }}</div>
-            <div class="info-content">Phone: {{ $invoice->tradie->contact_number }}</div>
+        <div class="info-section" style="background-color: #f8fafc; padding: 25px; border-radius: 15px; border: 1px solid #f1f5f9;">
+            <div class="info-title">Issued To (Customer)</div>
+            <div class="info-content bold" style="font-size: 18px; margin-bottom: 5px;">{{ $invoice->customer_name }}</div>
+            <div class="info-content" style="white-space: pre-line; line-height: 1.4;">{{ $invoice->customer_address ?: 'No address provided' }}</div>
         </div>
 
-        <div class="details-box">
-            <div class="details-title">Work Description</div>
-            <div class="details-content">{{ $invoice->work_description }}</div>
-        </div>
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>Service Description</th>
+                    <th width="120" style="text-align: right;">Amount ($)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(is_array($invoice->items))
+                    @foreach($invoice->items as $item)
+                        <tr>
+                            <td>{{ $item['description'] }}</td>
+                            <td class="amount">{{ number_format($item['amount'], 2) }}</td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td>{{ $invoice->work_description }}</td>
+                        <td class="amount">{{ number_format($invoice->amount, 2) }}</td>
+                    </tr>
+                @endif
+            </tbody>
+        </table>
 
         <div class="total-section">
-            <div style="margin-bottom: 10px; color: #64748b;">
-                Subtotal: ${{ number_format($invoice->amount, 2) }}
+            <div style="margin-bottom: 8px; color: #64748b; font-size: 13px; font-weight: bold; padding-right: 15px;">
+                SUBTOTAL: ${{ number_format($invoice->amount, 2) }}
             </div>
             <div class="total-box">
-                Total Amount: ${{ number_format($invoice->amount, 2) }}
+                <span class="total-label">Grand Total Bill</span>
+                ${{ number_format($invoice->amount, 2) }}
             </div>
         </div>
 
