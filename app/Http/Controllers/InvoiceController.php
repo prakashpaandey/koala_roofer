@@ -13,9 +13,24 @@ class InvoiceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $invoices = Invoice::with('tradie')->latest()->paginate(10);
+        $query = Invoice::with('tradie')->latest();
+
+        if ($request->has('search')) {
+            $search = $request->get('search');
+            $query->where('invoice_number', 'like', "%{$search}%")
+                  ->orWhereHas('tradie', function($q) use ($search) {
+                      $q->where('name', 'like', "%{$search}%");
+                  });
+        }
+
+        $invoices = $query->paginate(10);
+
+        if ($request->ajax()) {
+            return view('invoices.partials.list', compact('invoices'))->render();
+        }
+
         return view('invoices.index', compact('invoices'));
     }
 
