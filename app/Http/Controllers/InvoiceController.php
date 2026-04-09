@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Invoice;
 use App\Models\Tradie;
+use App\Models\Setting;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class InvoiceController extends Controller
@@ -40,7 +41,8 @@ class InvoiceController extends Controller
     public function create()
     {
         $tradies = Tradie::orderBy('name')->get();
-        return view('invoices.create', compact('tradies'));
+        $defaultTaxRate = Setting::get('default_tax_rate', 0);
+        return view('invoices.create', compact('tradies', 'defaultTaxRate'));
     }
 
     /**
@@ -53,13 +55,23 @@ class InvoiceController extends Controller
             'date' => 'required|date',
             'customer_name' => 'required|string|max:255',
             'customer_address' => 'required|string',
+            'tax_percentage' => 'required|numeric|min:0|max:100',
             'items' => 'required|array|min:1',
             'items.*.description' => 'required|string',
             'items.*.amount' => 'required|numeric|min:0',
         ]);
 
-        // Calculate total amount from items
-        $totalAmount = collect($request->items)->sum('amount');
+        // Calculate Subtotal
+        $subtotal = collect($request->items)->sum('amount');
+        
+        // Calculate Tax Amount
+        $taxPercentage = $validated['tax_percentage'];
+        $taxAmount = ($subtotal * $taxPercentage) / 100;
+        
+        // Total Amount (Subtotal + Tax)
+        $totalAmount = $subtotal + $taxAmount;
+
+        $validated['tax_amount'] = $taxAmount;
         $validated['amount'] = $totalAmount;
 
         Invoice::create($validated);
@@ -83,7 +95,7 @@ class InvoiceController extends Controller
         $invoice->load('tradie');
         $pdf = Pdf::loadView('invoices.pdf', compact('invoice'));
         
-        return $pdf->download('Invoice-' . $invoice->invoice_number . '.pdf');
+        return $pdf->download('Invoice-' . str_replace('#', '', $invoice->invoice_number) . '.pdf');
     }
 
     /**

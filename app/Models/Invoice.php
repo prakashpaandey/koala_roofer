@@ -15,6 +15,8 @@ class Invoice extends Model
         'work_description', // Optional
         'items',
         'amount',
+        'tax_percentage',
+        'tax_amount',
     ];
 
     protected $casts = [

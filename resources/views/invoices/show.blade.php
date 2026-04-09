@@ -107,10 +107,14 @@
 
                         <!-- Financial Calculation -->
                         <div class="flex justify-end pt-8 border-t border-slate-50">
-                            <div class="w-full md:w-80 space-y-4">
-                                <div class="flex justify-between items-center text-secondary-text font-bold uppercase text-[10px] tracking-widest">
+                            <div class="w-full md:w-80 space-y-3">
+                                <div class="flex justify-between items-center text-secondary-text font-bold uppercase text-[9px] tracking-widest px-1">
                                     <span>Subtotal</span>
-                                    <span class="text-primary-text font-black text-sm">${{ number_format($invoice->amount, 2) }}</span>
+                                    <span class="text-primary-text font-black text-sm">${{ number_format($invoice->amount - $invoice->tax_amount, 2) }}</span>
+                                </div>
+                                <div class="flex justify-between items-center text-secondary-text font-bold uppercase text-[9px] tracking-widest px-1 pb-4 border-b border-slate-50">
+                                    <span>Tax ({{ number_format($invoice->tax_percentage, 0) }}%)</span>
+                                    <span class="text-primary-text font-black text-sm">${{ number_format($invoice->tax_amount, 2) }}</span>
                                 </div>
                                 <div class="flex justify-between items-center bg-roofing-blue text-white px-8 py-6 rounded-2xl shadow-xl shadow-blue-100 transform hover:scale-[1.02] transition-transform">
                                     <span class="text-[10px] font-black uppercase tracking-widest opacity-70">Total Bill</span>

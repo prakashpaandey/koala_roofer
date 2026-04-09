@@ -35,6 +35,9 @@
                     <form action="{{ route('invoices.store') }}" method="POST" 
                         x-data="{ 
                             items: [{ description: '', amount: 0 }],
+                            tax_percentage: {{ $defaultTaxRate ?? 0 }},
+                            is_saving_tax: false,
+                            show_tax_success: false,
                             addItem() {
                                 this.items.push({ description: '', amount: 0 });
                             },
@@ -43,8 +46,39 @@
                                     this.items.splice(index, 1);
                                 }
                             },
-                            total() {
+                            subtotal() {
                                 return this.items.reduce((acc, item) => acc + parseFloat(item.amount || 0), 0);
+                            },
+                            taxAmount() {
+                                return (this.subtotal() * this.tax_percentage) / 100;
+                            },
+                            total() {
+                                return this.subtotal() + this.taxAmount();
+                            },
+                            async setPermanentTax() {
+                                this.is_saving_tax = true;
+                                try {
+                                    const response = await fetch('{{ route('settings.tax-rate') }}', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                        },
+                                        body: JSON.stringify({ rate: this.tax_percentage })
+                                    });
+                                    const data = await response.json();
+                                    if (data.success) {
+                                        this.show_tax_success = true;
+                                        setTimeout(() => { this.show_tax_success = false; }, 3000);
+                                    } else {
+                                        alert('Error: ' + (data.message || 'Unknown error'));
+                                    }
+                                } catch (e) {
+                                    console.error('Error saving tax rate:', e);
+                                    alert('Failed to save tax rate. Please check your connection.');
+                                } finally {
+                                    this.is_saving_tax = false;
+                                }
                             }
                         }"
                         class="max-w-5xl mx-auto space-y-8"
@@ -65,6 +99,7 @@
                                 </div>
                                 
                                 <div class="space-y-6">
+                                    <input type="hidden" name="tax_percentage" x-model="tax_percentage">
                                     <div class="grid grid-cols-2 gap-4">
                                         <div class="group">
                                             <x-input-label for="invoice_number" :value="__('Invoice #')" class="text-[10px] font-black uppercase tracking-widest text-slate-400" />
@@ -78,6 +113,20 @@
                                             <x-input-error :messages="$errors->get('date')" class="mt-2" />
                                         </div>
                                     </div>
+
+                                    <!-- Tax Configuration -->
+                                    <div class="bg-blue-50/50 rounded-2xl p-4 border border-blue-100/50 space-y-3">
+                                         <div class="flex items-center justify-between">
+                                            <x-input-label for="tax_input" :value="__('Tax Rate (%)')" class="text-[9px] font-black uppercase tracking-widest text-roofing-blue" />
+                                            <button type="button" @click="setPermanentTax()" 
+                                                class="text-[8px] font-black uppercase tracking-widest text-roofing-blue hover:text-construction-orange transition-colors flex items-center gap-1"
+                                                :disabled="is_saving_tax">
+                                                <span x-text="is_saving_tax ? 'Saving...' : 'Set as Permanent'"></span>
+                                                <svg x-show="!is_saving_tax" class="h-2 w-2" fill="currentColor" viewBox="0 0 20 20"><path d="M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l6-6a1 1 0 00-1.414-1.414l-5.303 5.303-2.286-2.286z"/></svg>
+                                            </button>
+                                         </div>
+                                         <x-text-input id="tax_input" class="block w-full border-white bg-white/80 focus:bg-white text-sm font-black text-roofing-blue" type="number" step="0.01" x-model="tax_percentage" />
+                                     </div>
 
                                     <div class="group">
                                         <x-input-label for="customer_name" :value="__('Customer Name')" class="text-[10px] font-black uppercase tracking-widest text-slate-400 group-focus-within:text-construction-orange transition-colors" />
@@ -137,11 +186,22 @@
                                 <!-- Financial Summary Card -->
                                 <div class="bg-roofing-blue rounded-[2rem] shadow-xl p-8 text-white relative overflow-hidden">
                                      <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-full -mr-10 -mt-10"></div>
-                                     <div class="relative">
-                                         <p class="text-[10px] font-black uppercase tracking-widest opacity-60 mb-2">Grand Total Bill</p>
-                                         <div class="flex items-baseline gap-1">
-                                             <span class="text-xl font-bold opacity-40">$</span>
-                                             <span class="text-4xl font-black tracking-tighter" x-text="total().toLocaleString(undefined, {minimumFractionDigits: 2})">0.00</span>
+                                     <div class="relative space-y-4">
+                                         <div class="flex justify-between items-center opacity-60">
+                                             <p class="text-[9px] font-black uppercase tracking-widest">Subtotal</p>
+                                             <p class="text-xs font-bold">$<span x-text="subtotal().toLocaleString(undefined, {minimumFractionDigits: 2})">0.00</span></p>
+                                         </div>
+                                         <div class="flex justify-between items-center opacity-60 border-b border-white/10 pb-4">
+                                             <p class="text-[9px] font-black uppercase tracking-widest">Tax (<span x-text="tax_percentage">0</span>%)</p>
+                                             <p class="text-xs font-bold">$<span x-text="taxAmount().toLocaleString(undefined, {minimumFractionDigits: 2})">0.00</span></p>
+                                         </div>
+                                         
+                                         <div>
+                                             <p class="text-[10px] font-black uppercase tracking-widest opacity-60 mb-2">Grand Total Bill</p>
+                                             <div class="flex items-baseline gap-1">
+                                                 <span class="text-xl font-bold opacity-40">$</span>
+                                                 <span class="text-4xl font-black tracking-tighter" x-text="total().toLocaleString(undefined, {minimumFractionDigits: 2})">0.00</span>
+                                             </div>
                                          </div>
                                      </div>
                                 </div>
@@ -153,6 +213,25 @@
                             <x-primary-button class="px-12 py-4 shadow-xl shadow-orange-100 rounded-2xl">
                                 {{ __('Complete & Generate Invoice') }}
                             </x-primary-button>
+                        </div>
+
+                        <!-- Success Toast Notification -->
+                        <div x-show="show_tax_success" 
+                             x-transition:enter="transition ease-out duration-300"
+                             x-transition:enter-start="opacity-0 transform translate-y-4"
+                             x-transition:enter-end="opacity-100 transform translate-y-0"
+                             x-transition:leave="transition ease-in duration-200"
+                             x-transition:leave-start="opacity-100 transform translate-y-0"
+                             x-transition:leave-end="opacity-0 transform translate-y-4"
+                             class="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 bg-roofing-blue text-white px-8 py-4 rounded-2xl shadow-2xl flex items-center gap-4 border border-white/10"
+                             x-cloak>
+                            <div class="p-2 bg-construction-orange rounded-full text-white">
+                                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-xs font-black uppercase tracking-widest">Settings Saved</span>
+                                <span class="text-[10px] font-bold opacity-70">Tax rate updated permanently.</span>
+                            </div>
                         </div>
                     </form>
                     @endif

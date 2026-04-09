@@ -12,113 +12,99 @@
             line-height: 1.6;
         }
         .container {
-            width: 90%;
-            margin: 50px auto;
+            width: 92%;
+            margin: 20px auto;
         }
         .header {
             border-bottom: 2px solid #4f46e5;
-            padding-bottom: 20px;
-            margin-bottom: 40px;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
         }
         .header table {
             width: 100%;
         }
         .logo {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
             color: #4f46e5;
             text-transform: uppercase;
         }
         .invoice-label {
-            font-size: 36px;
+            font-size: 28px;
             font-weight: 900;
             color: #1e1b4b;
             text-align: right;
             text-transform: uppercase;
         }
         .info-section {
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
         .info-section table {
             width: 100%;
         }
         .info-title {
-            font-size: 12px;
+            font-size: 10px;
             font-weight: bold;
             color: #94a3b8;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
         .info-content {
-            font-size: 14px;
+            font-size: 12px;
             color: #1e293b;
         }
         .info-content.bold {
             font-weight: bold;
-            font-size: 16px;
+            font-size: 14px;
         }
         .details-box {
             background-color: #f8fafc;
             border: 1px solid #e2e8f0;
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
         }
         .details-title {
-            font-size: 13px;
+            font-size: 11px;
             font-weight: bold;
             color: #64748b;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 8px;
+            padding-bottom: 5px;
         }
         .details-content {
-            font-size: 14px;
+            font-size: 12px;
             color: #334155;
             white-space: pre-wrap;
         }
-        .total-section {
-            margin-top: 50px;
-            text-align: right;
-        }
-        .total-box {
-            display: inline-block;
-            width: 300px;
-            background-color: #4f46e5;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 6px;
-            font-size: 20px;
-            font-weight: bold;
-        }
         .footer {
-            margin-top: 80px;
+            margin-top: 30px;
             text-align: center;
-            font-size: 12px;
+            font-size: 10px;
             color: #94a3b8;
             border-top: 1px solid #f1f5f9;
-            padding-top: 20px;
+            padding-top: 10px;
         }
         .items-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         .items-table th {
             background-color: #f1f5f9;
             color: #4f46e5;
             text-align: left;
-            padding: 12px;
-            font-size: 10px;
+            padding: 10px;
+            font-size: 9px;
             text-transform: uppercase;
             border-bottom: 2px solid #e2e8f0;
         }
         .items-table td {
-            padding: 15px 12px;
+            padding: 10px;
             border-bottom: 1px solid #f1f5f9;
-            font-size: 13px;
+            font-size: 12px;
             color: #334155;
         }
         .items-table .amount {
@@ -126,25 +112,26 @@
             font-weight: bold;
         }
         .total-section {
-            margin-top: 30px;
+            margin-top: 15px;
             text-align: right;
         }
         .total-box {
             display: inline-block;
-            width: 250px;
-            background-color: #1e1b4b;
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
-            font-size: 24px;
+            width: 220px;
+            border-top: 2px solid #1e1b4b;
+            border-bottom: 2px solid #1e1b4b;
+            color: #1e1b4b;
+            background-color: transparent;
+            padding: 10px 0;
+            font-size: 20px;
             font-weight: 900;
         }
         .total-label {
             display: block;
-            font-size: 10px;
+            font-size: 9px;
             text-transform: uppercase;
-            opacity: 0.7;
-            margin-bottom: 5px;
+            color: #64748b;
+            margin-bottom: 3px;
         }
     </style>
 </head>
@@ -154,7 +141,12 @@
             <table>
                 <tr>
                     <td>
-                        <img src="{{ public_path('logo.png') }}" style="height: 60px; width: auto; margin-bottom: 5px;">
+                        @php
+                            $logoPath = public_path('favicon.png');
+                            $logoData = base64_encode(file_get_contents($logoPath));
+                            $logoSrc = 'data:image/png;base64,' . $logoData;
+                        @endphp
+                        <img src="{{ $logoSrc }}" style="height: 64px; width: auto; border-radius: 8px;">
                     </td>
                     <td class="invoice-label">Invoice</td>
                 </tr>
@@ -194,20 +186,23 @@
         <table class="items-table">
             <thead>
                 <tr>
+                    <th width="30">S.N.</th>
                     <th>Service Description</th>
                     <th width="120" style="text-align: right;">Amount ($)</th>
                 </tr>
             </thead>
             <tbody>
                 @if(is_array($invoice->items))
-                    @foreach($invoice->items as $item)
+                    @foreach($invoice->items as $index => $item)
                         <tr>
+                            <td style="color: #94a3b8; font-weight: bold;">{{ $index + 1 }}.</td>
                             <td>{{ $item['description'] }}</td>
                             <td class="amount">{{ number_format($item['amount'], 2) }}</td>
                         </tr>
                     @endforeach
                 @else
                     <tr>
+                        <td style="color: #94a3b8; font-weight: bold;">1.</td>
                         <td>{{ $invoice->work_description }}</td>
                         <td class="amount">{{ number_format($invoice->amount, 2) }}</td>
                     </tr>
@@ -216,9 +211,16 @@
         </table>
 
         <div class="total-section">
-            <div style="margin-bottom: 8px; color: #64748b; font-size: 13px; font-weight: bold; padding-right: 15px;">
-                SUBTOTAL: ${{ number_format($invoice->amount, 2) }}
+            <div style="width: 250px; display: inline-block; text-align: right; margin-bottom: 8px;">
+                <span style="color: #64748b; font-size: 11px; font-weight: bold; text-transform: uppercase;">Subtotal:</span>
+                <span style="color: #1e293b; font-size: 13px; font-weight: bold; margin-left: 10px;">${{ number_format($invoice->amount - $invoice->tax_amount, 2) }}</span>
             </div>
+            <br>
+            <div style="width: 250px; display: inline-block; text-align: right; margin-bottom: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px;">
+                <span style="color: #64748b; font-size: 11px; font-weight: bold; text-transform: uppercase;">Tax ({{ number_format($invoice->tax_percentage, 0) }}%):</span>
+                <span style="color: #1e293b; font-size: 13px; font-weight: bold; margin-left: 10px;">${{ number_format($invoice->tax_amount, 2) }}</span>
+            </div>
+            <br>
             <div class="total-box">
                 <span class="total-label">Grand Total Bill</span>
                 ${{ number_format($invoice->amount, 2) }}
