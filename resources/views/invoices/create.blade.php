@@ -68,7 +68,7 @@
                                     <div class="grid grid-cols-2 gap-4">
                                         <div class="group">
                                             <x-input-label for="invoice_number" :value="__('Invoice #')" class="text-[10px] font-black uppercase tracking-widest text-slate-400" />
-                                            <x-text-input id="invoice_number" class="block mt-2 w-full border-slate-100 bg-slate-50/50 focus:bg-white text-sm font-bold" type="text" name="invoice_number" :value="old('invoice_number', 'KR-' . date('YmdHis'))" required />
+                                            <x-text-input id="invoice_number" class="block mt-2 w-full border-slate-100 bg-slate-50/50 focus:bg-white text-sm font-bold" type="text" name="invoice_number" :value="old('invoice_number', '#KR-' . rand(10000, 99999))" required />
                                             <x-input-error :messages="$errors->get('invoice_number')" class="mt-2" />
                                         </div>
 

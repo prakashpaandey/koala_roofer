@@ -21,7 +21,7 @@
                     <span class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">{{ \Carbon\Carbon::parse($invoice->date)->format('M d, Y') }}</span>
                 </div>
                 <div class="text-lg font-black text-roofing-blue tracking-tighter break-all leading-tight">
-                    #{{ $invoice->invoice_number }}
+                    {{ $invoice->invoice_number }}
                 </div>
             </div>
 
@@ -83,7 +83,7 @@
                 @forelse($invoices as $invoice)
                     <tr class="hover:bg-slate-50/50 transition-colors group">
                         <th class="px-8 py-5 font-black text-roofing-blue tracking-tight text-sm">
-                            #{{ $invoice->invoice_number }}
+                            {{ $invoice->invoice_number }}
                         </th>
                         <td class="px-8 py-5">
                             <div class="flex items-center">

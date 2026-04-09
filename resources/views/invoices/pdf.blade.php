@@ -174,7 +174,7 @@
                     <td width="45%" valign="top" align="right">
                         <div>
                             <span class="info-title">Invoice Number:</span><br>
-                            <span class="info-content bold" style="font-size: 20px;">#{{ $invoice->invoice_number }}</span>
+                            <span class="info-content bold" style="font-size: 20px;">{{ $invoice->invoice_number }}</span>
                         </div>
                         <div style="margin-top: 15px;">
                             <span class="info-title">Date of Issue:</span><br>

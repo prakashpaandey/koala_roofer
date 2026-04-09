@@ -8,7 +8,7 @@
                     </svg>
                 </a>
                 <h2 class="font-black text-2xl text-roofing-blue leading-tight uppercase tracking-tight">
-                    {{ __('Invoice Details') }}: <span class="text-construction-orange">#{{ $invoice->invoice_number }}</span>
+                    {{ __('Invoice Details') }}: <span class="text-construction-orange">{{ $invoice->invoice_number }}</span>
                 </h2>
             </div>
             <div class="flex gap-3">
@@ -38,7 +38,7 @@
                         <div class="text-left md:text-right relative z-10">
                             <div class="mb-4">
                                 <p class="text-[10px] font-black uppercase tracking-widest text-blue-300 opacity-70">Invoice Number</p>
-                                <p class="text-2xl font-black tracking-tight">#{{ $invoice->invoice_number }}</p>
+                                <p class="text-2xl font-black tracking-tight">{{ $invoice->invoice_number }}</p>
                             </div>
                             <div>
                                 <p class="text-[10px] font-black uppercase tracking-widest text-blue-300 opacity-70">Date of Issue</p>
