@@ -56,7 +56,8 @@
                                 <h3 class="text-xs font-black text-roofing-blue dark:text-gray-200 uppercase tracking-widest border-b border-gray-100 dark:border-slate-800 pb-2">Issued By</h3>
                                 <div class="text-primary-text space-y-1">
                                     <p class="font-black text-xl text-roofing-blue dark:text-gray-100">Koalaroofers Pty Limited</p>
-                                    <p class="text-sm font-medium text-secondary-text dark:text-gray-400">10/21 Colbee Ct, Phillip</p>
+                                    <p class="text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">ABN: 51 824 753 556</p>
+                                    <p class="text-sm font-medium text-secondary-text dark:text-gray-400 pt-1">10/21 Colbee Ct, Phillip</p>
                                     <p class="text-sm font-medium text-secondary-text dark:text-gray-400">ACT 2606, Australia</p>
                                     <p class="pt-2 text-sm font-bold text-construction-orange dark:text-orange-400">billing@koalaroofer.com</p>
                                     <p class="text-sm font-bold text-secondary-text dark:text-gray-400">+61 452 456 626</p>
@@ -66,7 +67,10 @@
                                 <h3 class="text-xs font-black text-roofing-blue dark:text-gray-200 uppercase tracking-widest border-b border-gray-100 dark:border-slate-800 pb-2">Client Details</h3>
                                 <div class="text-primary-text space-y-1">
                                     <p class="font-black text-xl text-roofing-blue dark:text-gray-100">{{ $invoice->customer_name }}</p>
-                                    <p class="text-sm font-medium text-secondary-text dark:text-gray-400 whitespace-pre-line">{{ $invoice->customer_address ?: 'No address provided' }}</p>
+                                    @if($invoice->customer_abn)
+                                    <p class="text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">ABN: {{ $invoice->customer_abn }}</p>
+                                    @endif
+                                    <p class="text-sm font-medium text-secondary-text dark:text-gray-400 whitespace-pre-line pt-1">{{ $invoice->customer_address ?: 'No address provided' }}</p>
                                 </div>
                             </div>
                         </div>
@@ -114,7 +118,7 @@
                                     <span class="text-primary-text dark:text-gray-200 font-black text-sm">${{ number_format($invoice->amount - $invoice->tax_amount, 2) }}</span>
                                 </div>
                                 <div class="flex justify-between items-center text-secondary-text dark:text-gray-400 font-bold uppercase text-[9px] tracking-widest px-1 pb-4 border-b border-slate-50 dark:border-slate-800">
-                                    <span>Tax ({{ number_format($invoice->tax_percentage, 0) }}%)</span>
+                                    <span>GST ({{ number_format($invoice->tax_percentage, 0) }}%)</span>
                                     <span class="text-primary-text dark:text-gray-200 font-black text-sm">${{ number_format($invoice->tax_amount, 2) }}</span>
                                 </div>
                                 <div class="flex justify-between items-center bg-roofing-blue dark:bg-slate-800 text-white px-8 py-6 rounded-2xl shadow-xl shadow-blue-100 dark:shadow-none transform hover:scale-[1.02] transition-transform">

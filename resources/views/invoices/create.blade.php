@@ -110,10 +110,10 @@
                                             </div>
                                         </div>
 
-                                        <!-- Tax Configuration: Compact -->
+                                        <!-- GST Configuration: Compact -->
                                         <div class="bg-blue-50/30 dark:bg-slate-800/30 rounded-xl p-3 border border-blue-100/50 dark:border-slate-700/50">
                                              <div class="flex items-center justify-between mb-1.5">
-                                                <x-input-label for="tax_input" :value="__('Tax (%)')" class="text-[8px] font-black uppercase text-roofing-blue dark:text-blue-400" />
+                                                <x-input-label for="tax_input" :value="__('GST (%)')" class="text-[8px] font-black uppercase text-roofing-blue dark:text-blue-400" />
                                                 <button type="button" @click="setPermanentTax()" 
                                                     class="text-[7px] font-black uppercase tracking-widest text-roofing-blue dark:text-blue-400 hover:text-construction-orange dark:hover:text-construction-orange transition-colors"
                                                     :disabled="is_saving_tax">
@@ -123,9 +123,15 @@
                                              <x-text-input id="tax_input" class="block w-full border-white dark:border-slate-700 bg-white/80 dark:bg-slate-900 focus:bg-white dark:focus:bg-slate-800 text-xs font-black text-roofing-blue dark:text-gray-100 py-1.5" type="number" step="0.1" x-model="tax_percentage" />
                                          </div>
 
-                                        <div class="group">
-                                            <x-input-label for="customer_name" :value="__('Customer')" class="text-[9px] font-bold uppercase text-slate-400 dark:text-slate-500 mb-1" />
-                                            <x-text-input id="customer_name" class="block w-full border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-950/50 focus:bg-white dark:focus:bg-slate-900 text-xs font-bold py-2 dark:text-gray-300" type="text" name="customer_name" :value="old('customer_name')" required placeholder="Steve Smith" />
+                                        <div class="grid grid-cols-2 gap-3">
+                                            <div class="group">
+                                                <x-input-label for="customer_name" :value="__('Customer')" class="text-[9px] font-bold uppercase text-slate-400 dark:text-slate-500 mb-1" />
+                                                <x-text-input id="customer_name" class="block w-full border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-950/50 focus:bg-white dark:focus:bg-slate-900 text-xs font-bold py-2 dark:text-gray-300" type="text" name="customer_name" :value="old('customer_name')" required placeholder="Steve Smith" />
+                                            </div>
+                                            <div class="group">
+                                                <x-input-label for="customer_abn" :value="__('Customer ABN')" class="text-[9px] font-bold uppercase text-slate-400 dark:text-slate-500 mb-1" />
+                                                <x-text-input id="customer_abn" class="block w-full border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-950/50 focus:bg-white dark:focus:bg-slate-900 text-xs font-bold py-2 dark:text-gray-300" type="text" name="customer_abn" :value="old('customer_abn')" placeholder="12 345 678 901" />
+                                            </div>
                                         </div>
 
                                         <div class="group">
@@ -207,7 +213,7 @@
                                                 <p class="text-xs font-black text-roofing-blue dark:text-gray-200">$<span x-text="subtotal().toLocaleString(undefined, {minimumFractionDigits: 2})">0.00</span></p>
                                             </div>
                                             <div class="text-right border-l border-slate-100 dark:border-slate-800 pl-4">
-                                                <p class="text-[7px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Tax (<span x-text="tax_percentage"></span>%)</p>
+                                                <p class="text-[7px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">GST (<span x-text="tax_percentage"></span>%)</p>
                                                 <p class="text-xs font-black text-roofing-blue dark:text-gray-200">$<span x-text="taxAmount().toLocaleString(undefined, {minimumFractionDigits: 2})">0.00</span></p>
                                             </div>
                                         </div>
@@ -246,7 +252,7 @@
                             </div>
                             <div class="flex flex-col">
                                 <span class="text-xs font-black uppercase tracking-widest">Settings Saved</span>
-                                <span class="text-[10px] font-bold opacity-70">Tax rate updated permanently.</span>
+                                <span class="text-[10px] font-bold opacity-70">GST rate updated permanently.</span>
                             </div>
                         </div>
                     </form>

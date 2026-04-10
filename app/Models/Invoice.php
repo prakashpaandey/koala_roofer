@@ -9,6 +9,7 @@ class Invoice extends Model
     protected $fillable = [
         'tradie_id', // Optional now
         'customer_name',
+        'customer_abn',
         'customer_address',
         'invoice_number',
         'date',

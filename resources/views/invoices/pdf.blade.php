@@ -159,6 +159,7 @@
                     <td width="55%" valign="top">
                         <div class="info-title">Bill From</div>
                         <div class="info-content bold" style="color: #4f46e5;">Koalaroofers Pty Limited</div>
+                        <div class="info-content" style="font-size: 10px; font-weight: bold; color: #64748b; margin-bottom: 4px;">ABN: 51 824 753 556</div>
                         <div class="info-content">10/21 Colbee Ct, Phillip</div>
                         <div class="info-content">ACT 2606, Australia</div>
                         <div class="info-content" style="color: #f97316; font-weight: bold; margin-top: 5px;">billing@koalaroofer.com</div>
@@ -181,6 +182,9 @@
         <div class="info-section" style="background-color: #f8fafc; padding: 25px; border-radius: 15px; border: 1px solid #f1f5f9;">
             <div class="info-title">Issued To (Customer)</div>
             <div class="info-content bold" style="font-size: 18px; margin-bottom: 5px;">{{ $invoice->customer_name }}</div>
+            @if($invoice->customer_abn)
+                <div class="info-content" style="font-size: 10px; font-weight: bold; color: #64748b; margin-bottom: 4px;">ABN: {{ $invoice->customer_abn }}</div>
+            @endif
             <div class="info-content" style="white-space: pre-line; line-height: 1.4;">{{ $invoice->customer_address ?: 'No address provided' }}</div>
         </div>
 
@@ -218,7 +222,7 @@
             </div>
             <br>
             <div style="width: 250px; display: inline-block; text-align: right; margin-bottom: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px;">
-                <span style="color: #64748b; font-size: 11px; font-weight: bold; text-transform: uppercase;">Tax ({{ number_format($invoice->tax_percentage, 0) }}%):</span>
+                <span style="color: #64748b; font-size: 11px; font-weight: bold; text-transform: uppercase;">GST ({{ number_format($invoice->tax_percentage, 0) }}%):</span>
                 <span style="color: #1e293b; font-size: 13px; font-weight: bold; margin-left: 10px;">${{ number_format($invoice->tax_amount, 2) }}</span>
             </div>
             <br>

@@ -54,6 +54,7 @@ class InvoiceController extends Controller
             'invoice_number' => 'required|string|unique:invoices,invoice_number',
             'date' => 'required|date',
             'customer_name' => 'required|string|max:255',
+            'customer_abn' => 'nullable|string|max:255',
             'customer_address' => 'required|string',
             'tax_percentage' => 'required|numeric|min:0|max:100',
             'items' => 'required|array|min:1',
